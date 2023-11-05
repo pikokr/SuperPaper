@@ -4,7 +4,7 @@
 # both fully qualified and a file based syntax are accepted for <fileName>:
 #     authlib com/mojang/authlib/yggdrasil/YggdrasilGameProfileRepository.java
 #     datafixerupper com.mojang.datafixers.DataFixerBuilder
-#     datafixerupper com/mojang/datafixers/util/Either.java
+#     datafixerupper com/mojang/datafixers/util/Either.javaBl
 # To import classes from the vanilla Minecraft jar use `minecraft` as the artifactId:
 #     minecraft net.minecraft.world.level.entity.LevelEntityGetterAdapter
 #     minecraft net/minecraft/world/level/entity/LevelEntityGetter.java
@@ -13,3 +13,6 @@
 #     mc_data dimension_type/overworld.json
 #
 
+minecraft net.minecraft.server.commands.RideCommand
+minecraft net.minecraft.server.commands.data.EntityDataAccessor
+minecraft net.minecraft.world.level.block.Blocks
