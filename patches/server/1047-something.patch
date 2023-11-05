@@ -1,0 +1,59 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: paring <paring@pikokr.dev>
+Date: Mon, 6 Nov 2023 01:06:37 +0900
+Subject: [PATCH] something
+
+
+diff --git a/src/main/java/net/minecraft/server/commands/RideCommand.java b/src/main/java/net/minecraft/server/commands/RideCommand.java
+index b34031dac90c08d9903e056b312c2c87bd25d19a..54d5542042e9f4f3c2c3f1403d73add5393dfbde 100644
+--- a/src/main/java/net/minecraft/server/commands/RideCommand.java
++++ b/src/main/java/net/minecraft/server/commands/RideCommand.java
+@@ -40,9 +40,8 @@ public class RideCommand {
+         Entity entity = rider.getVehicle();
+         if (entity != null) {
+             throw ERROR_ALREADY_RIDING.create(rider.getDisplayName(), entity.getDisplayName());
+-        } else if (vehicle.getType() == EntityType.PLAYER) {
+-            throw ERROR_MOUNTING_PLAYER.create();
+-        } else if (rider.getSelfAndPassengers().anyMatch((passenger) -> {
++        }
++        else if (rider.getSelfAndPassengers().anyMatch((passenger) -> {
+             return passenger == vehicle;
+         })) {
+             throw ERROR_MOUNTING_LOOP.create();
+diff --git a/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java b/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java
+index a5c430cb461213da72fe5494b02d303b77d68c28..d44a3797926b1f9bd6942e1d57b6bc1d3a20f928 100644
+--- a/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java
++++ b/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java
+@@ -42,13 +42,15 @@ public class EntityDataAccessor implements DataAccessor {
+ 
+     @Override
+     public void setData(CompoundTag nbt) throws CommandSyntaxException {
+-        if (this.entity instanceof Player) {
+-            throw ERROR_NO_PLAYERS.create();
+-        } else {
++        // Paper start
++        // if (this.entity instanceof Player) {
++        //     throw ERROR_NO_PLAYERS.create();
++        // } else {
+             UUID uUID = this.entity.getUUID();
+             this.entity.load(nbt);
+             this.entity.setUUID(uUID);
+-        }
++        // }
++        // Paper end
+     }
+ 
+     @Override
+diff --git a/src/main/java/org/spigotmc/TicksPerSecondCommand.java b/src/main/java/org/spigotmc/TicksPerSecondCommand.java
+index 9eb2823cc8f83bad2626fc77578b0162d9ed5782..e97269adabfacd61e02126886dd7d3ec4125ce5c 100644
+--- a/src/main/java/org/spigotmc/TicksPerSecondCommand.java
++++ b/src/main/java/org/spigotmc/TicksPerSecondCommand.java
+@@ -62,7 +62,7 @@ public class TicksPerSecondCommand extends Command
+     {
+         // Paper
+         net.kyori.adventure.text.format.TextColor color = ( ( tps > 18.0 ) ? net.kyori.adventure.text.format.NamedTextColor.GREEN : ( tps > 16.0 ) ? net.kyori.adventure.text.format.NamedTextColor.YELLOW : net.kyori.adventure.text.format.NamedTextColor.RED );
+-        String amount = Math.min(Math.round(tps * 100.0) / 100.0, 20.0) + (tps > 21.0  ? "*" : ""); // Paper - only print * at 21, we commonly peak to 20.02 as the tick sleep is not accurate enough, stop the noise
++        String amount = (Math.round(tps * 100.0) / 100.0) + (tps > 21.0  ? "*" : ""); // Paper - only print * at 21, we commonly peak to 20.02 as the tick sleep is not accurate enough, stop the noise
+         return net.kyori.adventure.text.Component.text(amount, color);
+         // Paper end
+     }
