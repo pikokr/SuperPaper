@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: paring <paring@pikokr.dev>
+Date: Mon, 6 Nov 2023 02:14:11 +0900
+Subject: [PATCH] fix compile error
+
+
+diff --git a/src/main/java/net/minecraft/world/level/block/Blocks.java b/src/main/java/net/minecraft/world/level/block/Blocks.java
+index d5654cfe37bd82f1290b280990a8502432491ae1..1a090200373d80b0271f807ed906aefbdf742fb6 100644
+--- a/src/main/java/net/minecraft/world/level/block/Blocks.java
++++ b/src/main/java/net/minecraft/world/level/block/Blocks.java
+@@ -1160,7 +1160,7 @@ public class Blocks {
+     }
+ 
+     private static Boolean ocelotOrParrot(BlockState state, BlockGetter world, BlockPos pos, EntityType<?> type) {
+-        return (boolean)type == EntityType.OCELOT || type == EntityType.PARROT;
++        return (boolean)(type == EntityType.OCELOT || type == EntityType.PARROT);
+     }
+ 
+     private static BedBlock bed(DyeColor color) {

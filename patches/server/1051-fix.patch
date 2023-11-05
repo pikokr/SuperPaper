@@ -1,0 +1,23 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: paring <paring@pikokr.dev>
+Date: Mon, 6 Nov 2023 02:17:11 +0900
+Subject: [PATCH] fix
+
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 8f31413c939cc2b0454ad3d9a1b618dbae449d00..4770e25f2abf2e5c20d7761c0c7eda7f9b6d33e8 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -1269,9 +1269,9 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+ 
+     protected void waitUntilNextTick() {
+         //this.executeAll(); // Paper - move this into the tick method for timings
+-        this.managedBlock(() -> {
+-            return !this.canSleepForTickNoOversleep(); // Paper - move oversleep into full server tick
+-        });
++        // this.managedBlock(() -> {
++        //     return !this.canSleepForTickNoOversleep(); // Paper - move oversleep into full server tick
++        // });
+     }
+ 
+     @Override
