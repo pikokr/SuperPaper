@@ -1,0 +1,21 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: paring <paring@pikokr.dev>
+Date: Mon, 6 Nov 2023 02:13:27 +0900
+Subject: [PATCH] disable login limit
+
+
+diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+index 1c4f272219e68373eaae93fc5ea9af7d8f3fd6f9..de17940a3e40fd2efc166995d83b7595b538b645 100644
+--- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+@@ -91,10 +91,6 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+             this.finishLoginAndWaitForClient(this.authenticatedProfile);
+         }
+ 
+-        if (this.tick++ == 600) {
+-            this.disconnect(Component.translatable("multiplayer.disconnect.slow_login"));
+-        }
+-
+     }
+ 
+     // CraftBukkit start

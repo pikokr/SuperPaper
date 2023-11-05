@@ -1,0 +1,20 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: paring <paring@pikokr.dev>
+Date: Mon, 6 Nov 2023 01:07:53 +0900
+Subject: [PATCH] abilities
+
+
+diff --git a/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java b/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java
+index d44a3797926b1f9bd6942e1d57b6bc1d3a20f928..0a6609f5d32f0b611af82f673eef6b69ae2737a0 100644
+--- a/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java
++++ b/src/main/java/net/minecraft/server/commands/data/EntityDataAccessor.java
+@@ -49,6 +49,9 @@ public class EntityDataAccessor implements DataAccessor {
+             UUID uUID = this.entity.getUUID();
+             this.entity.load(nbt);
+             this.entity.setUUID(uUID);
++            if (entity instanceof Player player) {
++                player.onUpdateAbilities();
++            }
+         // }
+         // Paper end
+     }
